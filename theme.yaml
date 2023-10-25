@@ -1,0 +1,24 @@
+apiVersion: theme.halo.run/v1alpha1
+kind: Theme
+metadata:
+  name: theme-stack-R
+spec:
+  customTemplates:
+    page:
+      - name: 友链
+        description: 友情链接页
+        screenshot:
+        file: page_links.html
+  displayName: theme-stack
+  author:
+    name: Randall
+    website: "https://randallanjie.com"
+  description: randallanjie.com
+  logo: "https://randallanjie.com/img/blog_icon.png"
+  website: "https://randallanjie.com"
+  repo: "https://github.com/RandallAnjie/theme-stack-R"
+  settingName: "theme-stack-setting-R"
+  configMapName: "theme-stack-configMap-R"
+  version: "1.0.6"
+  requires: ">=2.0.0"
+

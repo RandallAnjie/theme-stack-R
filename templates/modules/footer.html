@@ -1,0 +1,44 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<footer class=site-footer th:fragment="footer">
+  <section class=copyright>
+    &copy; [[${theme.config.basic.copy ?: '2020 - 2022 '+site.title}]]
+  </section>
+  <section class=powerby>
+<!--    Powered by GitHub.Pages-->
+<!--    <br>-->
+    Powered by 
+    <a href=https://randallanjie.com/ target=_blank rel=noopener>
+      randallanjie.com
+    </a>
+  </section>
+    <th:block th:if="${not #lists.isEmpty(theme.config.basic.icp)}">
+  <section class=powerby>
+<!--    <img th:src="@{/assets/img/icp.png}" alt width=15px height=15px>-->
+    <a href="https://beian.miit.gov.cn/" target=_blank>
+      [[${theme.config.basic.icp}]]
+    </a>
+    <!-- 在模板中声明一个变量用于存储总字数 -->
+
+
+  </section>
+    </th:block>
+
+    <!-- 显示文章数和字数 -->
+  <th:block th:with="posts = ${postFinder.listAll()}">
+    <th:block th:with="articleCount=${posts.size()}, wordCount=0">
+      <th:block th:each="post : ${posts}"
+                th:with="content = ${postFinder.content(post.metadata.name)}">
+        <th:block th:with="wordCount=${wordCount + (content.content!=null ? #strings.length(content.content) : 0)}">
+        </th:block>
+      </th:block>
+      <section class=powerby>
+        📑共水了 [[${articleCount}]]篇文章.
+        <br>
+      </section>
+    </th:block>
+  </th:block>
+<!--    底部代码注入-->
+    <halo:footer />
+
+</footer>
+</html>

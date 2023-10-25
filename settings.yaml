@@ -1,0 +1,227 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: theme-stack-setting
+spec:
+  forms:
+    - group: basic
+      label: 基本设置
+      formSchema:
+        - $formkit: radio
+          name: headWelcome
+          id: headWelcome
+          key: headWelcome
+          label: 顶部欢迎
+          value: false
+          options:
+            - label: 显示
+              value: true
+            - label: 隐藏
+              value: false
+        - $formkit: code
+          if: "$get(headWelcome).value"
+          name: headHello
+          label: 顶部欢迎代码
+          value: "例如：<h2>👋Welcome To<strong style=color:#e99312>算艺轩—藏经阁</strong></h2>"
+          language: html
+        - $formkit: text
+          name: copy
+          label: copyright
+          value: ""
+          help: "例如：2020 - 2023 算艺轩—藏经阁"
+        - $formkit: text
+          name: icp
+          label: 备案信息
+          value: ""
+          help: "例如：京ICP备888888号-3"
+        - $formkit: url
+          name: postRandomImg
+          label: 博客封面随机 API
+          validation: "url"
+          value: "https://imgapi.xl0408.top/index.php"
+          help: "填写随机图Api  例如：https://imgapi.xl0408.top/index.php"
+        - $formkit: radio
+          name: lazyLoading
+          id: lazyLoading
+          key: lazyLoading
+          label: 懒加载图
+          value: false
+          options:
+            - label: 显示
+              value: true
+            - label: 隐藏
+              value: false
+        - $formkit: attachment
+          if: "$get(lazyLoading).value"
+          name: lazyUrl
+          label: 加载图片
+          help: "懒加载图片"
+    - group: leftSidebar
+      label: 左边栏
+      formSchema:
+        - $formkit: text
+          name: profileName
+          label: 社交名称
+          value: ""
+        - $formkit: text
+          name: profileDesc
+          label: 描述信息
+          value: "无限进步.✍️"
+        - $formkit: attachment
+          name: profileAvatar
+          label: 头像
+          value: ""
+        - $formkit: select
+          name: socialSelect
+          id: socialSelect
+          key: socialSelect
+          label: 评论使用模块
+          value: social-default
+          options:
+            - label: 默认图标
+              value: social-default
+            - label: 自选图标
+              value: social-option
+        - $formkit: repeater
+          if: "$get(socialSelect).value === 'social-default'"
+          name: socials
+          id: socials
+          key: socials
+          label: 社交信息
+          value: []
+          children:
+            - $formkit: select
+              name: socials_select
+              label: 平台
+              options:
+                - label: Github
+                  value: github
+                - label: Facebook
+                  value: facebook
+                - label: Twitter
+                  value: twitter
+                - label: Instagram
+                  value: instagram
+                - label: Telegram
+                  value: telegram
+                - label: Youtube
+                  value: youtube
+                - label: Bilibili
+                  value: bilibili
+                - label: 知乎
+                  value: zhihu
+                - label: QQ
+                  value: qq
+                - label: 微信公众号
+                  value: wechat_group
+                - label: Email
+                  value: email
+            - $formkit: text
+              name: socialUrl
+              label: 链接
+        - $formkit: repeater
+          if: "$get(socialSelect).value === 'social-option'"
+          name: socialOption
+          id: socialOption
+          key: socialOption
+          label: 社交信息
+          value: [ ]
+          children:
+            - $formkit: text
+              name: socialsName
+              label: 名称
+            - $formkit: text
+              name: socialsIcon
+              label: SVG矢量图代码
+              help: "标准请参考https://www.jiewen.run/archives/socialicon"
+            - $formkit: text
+              name: socialUrl
+              label: 跳转地址
+
+
+
+        - $formkit: menuRadio
+          name: menuItem
+          id: menuItem
+          key: menuItem
+          label: 导航栏
+          value: ""
+          help: "列表中的icon图片需自行去菜单设置填入"
+
+    - group: rightSidebar
+      label: 右边栏
+      formSchema:
+        - $formkit: textarea
+          name: indexWidgets
+          label: 首页右组件
+          value: "right-pic,search,archives,category,tags,newcomments"
+          help: "目前提供的小部件有：right-pic（一张大图）, archives（归档）,to-links（链接图片）, search（搜索）, category（文章分类）, tags（文章标签）， newcomments（最新评论） 。你可以随意组合或排序，以英文逗号隔开。"
+        - $formkit: textarea
+          name: postWidgets
+          label: 文章右组件
+          value: "right-pic,list,newcomments"
+          help: "目前提供的小部件有：right-pic（一张大图）,archives（归档）, to-links（链接图片）, search（搜索）, category（文章分类）, tags（文章标签）, list（文章目录）， newcomments（最新评论） 。你可以随意组合或排序，以英文逗号隔开。"
+        - $formkit: textarea
+          name: pageWidgets
+          label: 自定义页面右组件
+          value: "right-pic,list,newcomments"
+          help: "目前提供的小部件有：right-pic（一张大图）,archives（归档）, to-links（链接图片）, search（搜索）, category（文章分类）, tags（文章标签）, list（文章目录）， newcomments（最新评论） 。你可以随意组合或排序，以英文逗号隔开。"
+        - $formkit: textarea
+          name: linksWidgets
+          label: 友情链接右组件
+          value: "right-pic,list,newcomments"
+          help: "目前提供的小部件有：right-pic（一张大图）,archives（归档）, to-links（链接图片）, search（搜索）, category（文章分类）, tags（文章标签）, list（文章目录）， newcomments（最新评论） 。你可以随意组合或排序，以英文逗号隔开。"
+        - $formkit: textarea
+          name: tagsWidgets
+          label: 标签页面右组件
+          value: "right-pic,category,tags,archives"
+          help: "目前提供的小部件有：right-pic（一张大图）, archives（归档）,to-links（链接图片）, search（搜索）, category（文章分类）, tags（文章标签）, list（文章目录）， newcomments（最新评论） 。你可以随意组合或排序，以英文逗号隔开。"
+        - $formkit: textarea
+          name: categoryWidgets
+          label: 分类页面右组件
+          value: "right-pic,category,tags,archives"
+          help: "目前提供的小部件有：right-pic（一张大图）, archives（归档）,to-links（链接图片）, search（搜索）, category（文章分类）, tags（文章标签）, list（文章目录）， newcomments（最新评论） 。你可以随意组合或排序，以英文逗号隔开。"
+
+
+
+        - $formkit: attachment
+          name: rightPic
+          label: Right-pic设置
+          value: ""
+        - $formkit: code
+          name: toLinks
+          label: To-links设置
+          value: "<a href=https://travellings.link/ target=_blank rel=noopener title=开往-友链接力>
+      <img src=https://travellings.link/assets/logo.gif alt=开往-友链接力 width=120>
+    </a>
+    <a href=https://www.foreverblog.cn/go.html target=_blank>
+      <img src=https://img.foreverblog.cn/wormhole_1.gif alt style=width:auto;height:32px
+           title=穿梭虫洞-随机访问十年之约友链博客>
+    </a>"
+
+    - group: article
+      label: 文章页
+      formSchema:
+        - $formkit: select
+          name: articleComment
+          id: articleComment
+          key: articleComment
+          label: 评论使用模块
+          value: halo-comment
+          options:
+            - label: 官方评论插件
+              value: halo-comment
+            - label: Waline评论插件
+              value: waline-comment
+        - $formkit: url
+          if: "$get(articleComment).value === 'waline-comment'"
+          name: walineUrl
+          label: Waline服务地址
+          value: ""
+          help: "你的waline评论服务地址，具体参考：https://waline.js.org/"
+        - $formkit: text
+          if: "$get(articleComment).value === 'waline-comment'"
+          name: walineAdmin
+          label: Admin文字
+          value: "👻屑博主"
+          help: "管理者评论或回复时，名字旁边的介绍"
