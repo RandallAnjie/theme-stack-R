@@ -2,17 +2,13 @@
 
 ---
 
-预览：[Jiewen's Blog](https://www.jiewen.run/)
 
 文档：WIP
-> halo-theme-stack 是一款 [Halo2.0](https://github.com/halo-dev/halo) 的博客主题
+> theme-stack-R 是一款 [Halo2.0](https://github.com/halo-dev/halo) 的博客主题
 >
 > 移植于 Hugo  [hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)主题中 [L1nSn0w](https://blog.linsnow.cn/) 的魔改
 
 ## 安裝
-
-### 下载安装
-下载[releases](https://github.com/jiewenhuang/halo-theme-stack/releases)或者直接[下载代码](https://github.com/jiewenhuang/halo-theme-stack)，通过 Halo Console 后台主题安装处上传即可。
 
 ## 说明
 > 1、部分功能是使用插件进行支持  
